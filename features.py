@@ -1,4 +1,3 @@
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -10,4 +9,5 @@ def get_text_from_url(url):
         paragraphs = soup.find_all('p')
         text = ' '.join([p.get_text() for p in paragraphs])
         return text
-    
+    except:
+        return "Error: Could not fetch or parse the URL."

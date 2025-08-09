@@ -30,3 +30,11 @@ except Exception as e:
     print(f"Error loading models for flashcards: {e}")
     question_generator = None
     answer_extractor = None
+def generate_flashcard(context):
+    """
+    Generates a question-answer pair (flashcard) from a given context/paragraph.
+    Returns a dictionary with 'question' and 'answer'.
+    """
+    if not question_generator or not answer_extractor:
+        return {"question": "Error", "answer": "Models could not be loaded."}
+        

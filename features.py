@@ -18,3 +18,15 @@ def get_keywords(text):
     except Exception as e:
         print(f"Could not extract keywords: {e}")
         return []
+        
+# --- Feature 2: Flashcard Generation ---
+
+# Initialize the models once to be efficient.
+# This might take a moment the first time you run the app after adding this.
+try:
+    question_generator = pipeline("text2text-generation", model="valhalla/t5-base-qg-hl")
+    answer_extractor = pipeline("question-answering", model="deepset/roberta-base-squad2")
+except Exception as e:
+    print(f"Error loading models for flashcards: {e}")
+    question_generator = None
+    answer_extractor = None

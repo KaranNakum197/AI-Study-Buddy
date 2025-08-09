@@ -37,4 +37,21 @@ def generate_flashcard(context):
     """
     if not question_generator or not answer_extractor:
         return {"question": "Error", "answer": "Models could not be loaded."}
+
+    try:
+        # 1. Generate a question from the context
+        generated_question = question_generator(context)[0]['generated_text']
+
+        # 2. Use the generated question and original context to find the answer
+        qa_input = {
+            'question': generated_question,
+            'context': context
+        }
+        result = answer_extractor(qa_input)
+        
+        return {"question": generated_question, "answer": result['answer']}
+    except Exception as e:
+        print(f"Could not generate flashcard: {e}")
+        return {"question": "Could not generate question.", "answer": "An error occurred."}
+
         

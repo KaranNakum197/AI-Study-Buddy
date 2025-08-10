@@ -53,5 +53,26 @@ def generate_flashcard(context):
     except Exception as e:
         print(f"Could not generate flashcard: {e}")
         return {"question": "Could not generate question.", "answer": "An error occurred."}
+# --- Feature 3: URL Text Extraction ---
 
+def get_text_from_url(url):
+    """
+    Fetches a webpage URL and extracts all paragraph text.
+    """
+    try:
+        # Add a header to pretend we are a browser
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        page = requests.get(url, headers=headers, timeout=10)
+        
+        # Check if the request was successful
+        if page.status_code == 200:
+            soup = BeautifulSoup(page.content, 'html.parser')
+            # Find all paragraph tags <p> and join their text
+            paragraphs = soup.find_all('p')
+            text = ' '.join([p.get_text() for p in paragraphs])
+            return text
+        else:
+            return f"Error: Could not fetch URL. Status code: {page.status_code}"
+    except Exception as e:
+        return f"Error: An exception occurred while fetching the URL: {e}"
         

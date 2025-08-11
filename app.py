@@ -1,5 +1,6 @@
 import streamlit as st
 from logic import get_summary, get_questions, get_text_from_pdf
+from features import get_keywords, generate_flashcard, get_text_from_url
 
 st.set_page_config(page_title="AI Study Buddy", page_icon="🤖")
 

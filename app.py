@@ -50,3 +50,12 @@ if st.button("Extract Keywords"):
     keywords_result = get_keywords(text_input)
     st.success("Keywords:")
     st.write(keywords_result)
+
+if st.button("Generate a Flashcard"):
+    # Use a smaller chunk of text for better flashcards
+    flashcard_context = text_input[:500] 
+    with st.spinner("Creating a flashcard..."):
+        flashcard = generate_flashcard(flashcard_context)
+        st.success("Flashcard:")
+        st.write(f"**Question:** {flashcard['question']}")
+        st.write(f"**Answer:** {flashcard['answer']}")
